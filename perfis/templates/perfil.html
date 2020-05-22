@@ -9,7 +9,7 @@
     <h1>Detalhe Perfil</h1>
     <p>Nome:{{perfil.nome}}</p>
     <p>Email: {{perfil.email}}</p>
-    <p>Telefone:{{perfil.telefone}}</p>
+    <p>Telefone: {{ perfil.telefone|default:"Telefone não informado" }} </p>
     <p>Nome da Empresa: {{perfil.nome_empresa}}</p>
 </body>
 </html>

@@ -8,6 +8,8 @@ class Perfil(models.Model):
     telefone = models.CharField(max_length=15, null=False)
     nome_empresa = models.CharField(max_length=255, null=False)
 
+    contatos = models.ManyToManyField('self')
+
     def convidar(self,perfil_convidado):
         Convite(solicitante=self,convidado=perfil_convidado).save()
 
@@ -18,3 +20,8 @@ class Perfil(models.Model):
 class Convite(models.Model):
     solicitante = models.ForeignKey(Perfil, on_delete=models.CASCADE,related_name='convites_feitos')
     convidado = models.ForeignKey(Perfil, on_delete=models.CASCADE,related_name='convites_recebidos')
+
+    def aceitar(self):
+        self.convidado.contatos.add(self.solicitante)
+        self.solicitante.contatos.add(self.convidado)
+        self.delete()

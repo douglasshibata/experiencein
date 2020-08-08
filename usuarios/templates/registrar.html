@@ -1,24 +1,37 @@
 {% extends "base_usuario.html" %}
 
 {% block body %}
-    <form action="{% url 'registrar' %}" method="POST" class="form-signin">
-        {% csrf_token %}
-        <h2 class="form-signin-heading">Crie o seu usuário</h2>
-        <input type="text" id="id_email" name="email" class="form-control" placeholder="Email *" required autofocus>
+	<form class="form-signin" action="{% url 'registrar' %}" method="post">
+		{% csrf_token %}
 
-        <input type="text" id="id_nome" name="nome" class="form-control" placeholder="Nome *" required>
+		<h2 class="form-signin-heading">Crie o seu usuário</h2>
 
-        <input type="password" id="id_senha" name="senha" class="form-control" placeholder="Senha *" required>
+		<input type="text" name="email" id="id_email"
+			class="form-control" placeholder="Email *"
+			required>
 
-        <hr />
+		<input type="text" name="nome" id="id_nome" value='{{form.nome.value}}'
+			class="form-control" placeholder="Nome *"
+			required>
+	
+		<input type="password" name="senha" id="id_senha" value="{{form.senha.value}}"
+			class="form-control" placeholder="Senha *"
+			required>
+	
+		<input type="text" name="telefone" id="id_telefone" value='{{form.nome_empresa.value}}'
+			class="form-control" placeholder="Telefone">
 
-        <input type="text" id="id_telefone" name="telefone" class="form-control" placeholder="Telefone">
+		<input type="text" name="nome_empresa" id="id_nome_empresa" value='{{form.nome_empresa.value}}'
+			class="form-control" placeholder="Empresa">		
+	
+		<hr/>
 
-        <input type="text" id="id_nome_empresa" name="nome_empresa" class="form-control" placeholder="Empresa">
-
-        <hr />
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login">Registrar</button>
-
-    </form>
+		{% if form.errors %}
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss='alert' aria-hidden='true'>&times;</button>
+				{{form.non_field_errors}}
+			</div>
+		{% endif %}
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+	</form>
 {% endblock %}

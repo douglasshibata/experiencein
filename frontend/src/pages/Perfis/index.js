@@ -39,25 +39,23 @@ function Perfis() {
     const [perfis, setPerfis] = useState([]);
     const [error, setError] = useState('');
     const classes = useStyles();
-
     useEffect(() => {
         async function getPerfis() {
             try {
                 const response = await api.get('perfis/')
                 setPerfis(response.data)
-                console.log(response.data);
             } catch (error) {
                 setError("Erro ao carregar os dados")
                 console.log(error.data);
             }
         }
-        getPerfis()
+        getPerfis();
     }, [])
     const allPerfis = perfis.map(item => (
-        <Grid item xs={6} sm={3}  key={item.id}>
+        <Grid item xs={6} sm={3} key={item.id} >
 
             <Card className={classes.root} key={item.id}>
-                <CardContent  key={item.id}>
+                <CardContent >
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                         {item.id}
         </Typography>
@@ -69,8 +67,7 @@ function Perfis() {
         </Typography>
                 </CardContent>
                 <CardActions>
-                {item.pode_convidar?<Button size="small">Convidar</Button>:<p className={classes.success}>Já faz parte da Sua rede de Contatos</p>}
-                    
+                {item.pode_convidar?<Button size="small">Convidar</Button>:<Typography className={classes.success}>Já faz parte da Sua rede de Contatos</Typography>}
                 </CardActions>
             </Card>
         </Grid>

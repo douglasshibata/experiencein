@@ -8,11 +8,9 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             Sistema desenvolvido para o projeto final da disciplina Programação para internet II, orientada pelo Professor Fábio Henrique
-            <Typography>
                 Copyright © 
       {new Date().getFullYear()}
                 {'.'}
-            </Typography>
         </Typography>
     );
 }

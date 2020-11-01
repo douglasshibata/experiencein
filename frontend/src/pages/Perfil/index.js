@@ -43,14 +43,15 @@ function Perfil() {
             try {
                 const response = await api.get('perfil/')
                 setPerfis(response.data)
-                console.log(response.data);
             } catch (error) {
                 setError("Erro ao carregar os dados")
                 console.log(error.data);
             }
         }
         getPerfis()
-    }, )
+    }, [])
+    console.log(perfis.contatos === undefined);
+    //console.log(perfis.contatos.length === 0);
     const nome = localStorage.getItem('nome')
     return (
         <>
@@ -77,14 +78,15 @@ function Perfil() {
                                 <Typography variant="h5" component="h2">
                                    Contatos:
                                 </Typography>
-                                {//perfis.contatos.lenght ==0?<></>:
-                                    perfis.contatos.map(item=>(
+                                
+                                   {(perfis.contatos === undefined )|| perfis.contatos.length ===0?<></>:
+                                   perfis.contatos.map(item=>(
                                          <Typography key={item.id} className={classes.pos} color="textSecondary">
                                            Nome: {item.nome}
                                            <br/>
                                            Email: {item.email}
                                          </Typography>
-                                    ))}
+                                    ))} 
                             </CardContent>
                         </Card>
                     </Grid>
